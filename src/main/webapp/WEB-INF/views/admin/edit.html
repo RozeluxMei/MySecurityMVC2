@@ -16,7 +16,6 @@
                 <input type="text" th:field="*{firstName}" id="firstName">
             </td>
         </tr>
-
         <tr>
             <td>
                 <label for="lastName">Last name</label>
@@ -51,8 +50,15 @@
         </tr>
     </table>
 
+    <label> Roles:
+        <input type="checkbox" name="checkBoxRoles"
+               th:each="role: ${roles}"
+               th:text="${role.getRole()}"
+               th:value="${role.getRole()}"
+        />
+    </label>
         <input type="submit" value="Обновить пользователя">
-
 </form>
+    <a th:href="@{/logout}">logout</a>
 </body>
 </html>

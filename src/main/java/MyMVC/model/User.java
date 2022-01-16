@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity (name = "users")
@@ -26,7 +27,7 @@ public class User implements UserDetails {
     @Column (name = "password")
     private String password;
 
-    @ManyToMany (cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @ManyToMany (cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
     joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -131,5 +132,30 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+        User user = (User) o;
+        return id == user.id && firstName.equals(user.firstName) && lastName.equals(user.lastName) && mail.equals(user.mail) && username.equals(user.username) && password.equals(user.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", mail='" + mail + '\'' +
+                ", username='" + username + '\'' +
+                ", hash='" + hashCode() + '\'' +
+                '}';
     }
 }
