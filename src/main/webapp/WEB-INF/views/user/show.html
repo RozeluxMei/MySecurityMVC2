@@ -2,14 +2,26 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Пользователь</title>
+    <title>Профиль Пользователя</title>
 </head>
 <body>
-<p th:text="${user.getFirstName()}">
-<p th:text="${user.getLastName()}">
-<p th:text="${user.getMail()}">
-<br>
-<a th:href=/users/">Возврат</a>
+<table>
+    <tr>
+        <td>Username: </td> <td th:text="${user.getUsername()}"></td>
+    </tr>
+    <tr>
+        <td>Firstname: </td> <td th:text="${user.getFirstName()}"></td>
+    </tr>
+    <tr>
+        <td>Lastname: </td> <td th:text="${user.getLastName()}"></td>
+    </tr>
+    <tr>
+        <td>Mail: </td> <td th:text="${user.getMail()}"></td>
+    </tr>
+    <tr>
+        <td>Roles: </td> <td th:each="role: ${roles}" th:text="${role.getRole()} "></td>
+    </tr>
 
+</table>
 </body>
 </html>

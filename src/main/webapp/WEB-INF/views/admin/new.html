@@ -49,6 +49,13 @@
                 </td>
             </tr>
         </table>
+        <label> Roles:
+        <input type="checkbox" name="checkBoxRoles"
+               th:each="role: ${roles}"
+               th:text="${role.getRole()}"
+               th:value="${role.getRole()}"
+        />
+        </label>
     <input type="submit" value="Добавить пользователя">
 
 </form>
